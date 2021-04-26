@@ -29,7 +29,8 @@ class StaffApiPageController extends PageController
      */
     private static $allowed_actions = [
         'Login',
-        'LogOut'
+        'LogOut',
+        'ForgotPassword'
     ];
 
     public function Login()
@@ -111,6 +112,35 @@ class StaffApiPageController extends PageController
         return json_encode([
             'Status' => 201,
             'Message' => 'Sukses Log Out'
+        ]);
+    }
+
+    public function ForgotPassword()
+    {
+        if ($this->CheckClientID()) {
+            return $this->CheckClientID();
+        }
+
+        $Email = isset($_REQUEST['Email']) ? $_REQUEST['Email'] : null;
+
+        if (!$Email) {
+            return json_encode([
+                'Status' => 417,
+                'Message' => 'Mohon isi Email'
+            ]);
+        }
+
+        $staff = Staff::get()->filter('Email', $Email)->first();
+        if (!$staff) {
+            return json_encode([
+                'Status' => 404,
+                'Message' => 'Email tidak ditemukan / Belum terdaftar'
+            ]);
+        }
+
+        return json_encode([
+            'Status' => 200,
+            'Message' => 'Silahkan melanjukan proses forgot password pada link ini ' . StaffApiPage::get()->first()->AbsoluteLink() . 'RepairPassword/' . $staff->ID
         ]);
     }
 }
