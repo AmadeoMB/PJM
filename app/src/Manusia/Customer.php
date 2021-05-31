@@ -8,7 +8,6 @@ class Customer extends DataObject
         'Name' => 'Varchar(255)',
         'Address' => 'Text',
         'Phone' => 'Varchar(15)',
-        'Email' => 'Varchar(255)',
         'LimitKredit' => 'Int',
         'Status' => 'Int'
     ];
@@ -31,8 +30,8 @@ class Customer extends DataObject
         $arr = array();
         $arr['ID'] = $this->ID;
         $arr['Name'] = $this->Name;
-        $arr['Address'] = $this->Phone;
-        $arr['Email'] = $this->Email;
+        $arr['Address'] = $this->Address;
+        $arr['Phone'] = $this->Phone;
         $arr['LimitKredit'] = $this->LimitKredit;
         $arr['Status'] = $this->Status;
         return $arr;

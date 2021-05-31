@@ -13,11 +13,23 @@ class Item extends DataObject
 {
     private static $db = [
         'Title' => 'Varchar(255)',
-        'Description' => 'Text',
-        'Weight' => 'Int',
-        'Volume' => 'Int',
+        'Kemasan' => 'Int',
         'Discount' => 'Int',
         'Price' => 'Int',
-        'InitialBalance' => 'Int',
+        'BuyPrice' => 'Int'
     ];
+
+    public function toArray()
+    {
+        $arr = array();
+        $arr['ID'] = $this->ID;
+        $arr['Title'] = $this->Title;
+        if ($this->Kemasan != '' && $this->Kemasan != 0 && $this->Kemasan != 1) {
+            $arr['Title'] .= ' @' . $this->Kemasan;
+        }
+        $arr['Price'] = $this->Price;
+        $arr['Discount'] = $this->Discount;
+
+        return $arr;
+    }
 }

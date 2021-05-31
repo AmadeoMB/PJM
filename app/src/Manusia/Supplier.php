@@ -8,6 +8,16 @@ class Supplier extends DataObject
         'Name' => 'Varchar(255)',
         'Address' => 'Text',
         'Phone' => 'Varchar(15)',
-        'Email' => 'Varchar(255)',
     ];
+
+    public function toArray()
+    {
+        $arr = array();
+        $arr['ID'] = $this->ID;
+        $arr['Name'] = $this->Name;
+        $arr['Address'] = $this->Address;
+        $arr['Phone'] = $this->Phone;
+
+        return $arr;
+    }
 }
